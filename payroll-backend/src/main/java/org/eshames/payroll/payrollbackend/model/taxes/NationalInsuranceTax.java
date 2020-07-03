@@ -3,21 +3,19 @@ package org.eshames.payroll.payrollbackend.model.taxes;
 import org.eshames.payroll.payrollbackend.model.dto.impl.TaxDTO;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component("insurance_tax")
-public class NationalInsuranceTax implements Tax {
+public class NationalInsuranceTax extends Tax {
 
-    // Tax brackets - national insurance
-    private static final List<Integer> INSURANCE_BRACKETS = Arrays.asList(0, 6331, 44020);
-    private static final List<Float> INSURANCE_RATES = Arrays.asList(0.035f, 0.12f, 0f);
+    @PostConstruct
+    private void init() {
+        brackets = Arrays.asList(0.0, 6331.0, 44020.0, Double.MAX_VALUE);
+        rates = Arrays.asList(0.035, 0.12, 0.0);
+    }
     @Override
     public double calculateTax(int taxableIncome, TaxDTO taxDTO) {
-        List<Integer> relevantBrackets = INSURANCE_BRACKETS.stream()
-                .filter(insuranceBracket -> insuranceBracket <= taxableIncome)
-                .collect(Collectors.toList());
-        return 0;
+        return Math.ceil(super.calculateTax(taxableIncome, taxDTO));
     }
 }
