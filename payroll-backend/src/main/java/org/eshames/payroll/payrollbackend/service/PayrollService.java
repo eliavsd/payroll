@@ -21,18 +21,17 @@ public class PayrollService {
         float incomeForSavings = incomeDTO.getBaseSalary() + incomeDTO.getGlobalOvertime();
         float totalGrossIncome = incomeForSavings;
         float totalGrossForTax = incomeForSavings;
-        float totalIncomeTax = calculateTax(totalGrossForTax, "income");
-        float insuranceTax = calculateTax(totalGrossForTax, "insurance");
+        float totalIncomeTax = calculateTax(totalGrossForTax, taxDTO, "income");
+        float insuranceTax = calculateTax(totalGrossForTax, taxDTO, "insurance");
         float savings = 0;
-        totalIncomeTax -= taxDTO.getTaxPoints();
         return new ResultDTO(incomeForSavings, totalGrossIncome, totalGrossForTax, totalIncomeTax, insuranceTax, savings);
     }
 
 
 
-    public float calculateTax(float taxableIncome, String taxName) {
+    public float calculateTax(float taxableIncome, TaxDTO taxDTO, String taxName) {
         Tax tax = (Tax) applicationContext.getBean(taxName + "_tax");
-        return tax.calculateTax(taxableIncome);
+        return tax.calculateTax(taxableIncome, taxDTO);
     }
 
     public float calculateSavings(float savingsIncome, float savingsFactor, String savingsName) {
