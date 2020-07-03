@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <frontend-bundle-dir>${project.parent.basedir}/payroll-frontend/dist/payroll-frontend/
         </frontend-bundle-dir>
-        <start-class>org.eshames.payroll.payrollbackend.PayrollBackendApplication</start-class>
+        <start-class>org.eshames.payroll.payrollbackend.app.PayrollBackendApplication</start-class>
         <java-version>1.8</java-version>
     </properties>
 
@@ -30,7 +30,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
