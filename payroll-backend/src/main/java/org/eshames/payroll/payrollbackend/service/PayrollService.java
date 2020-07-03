@@ -33,7 +33,7 @@ public class PayrollService {
         return tax.calculateTax(taxableIncome, taxDTO);
     }
 
-    public float calculateSavings(float savingsIncome, float savingsFactor, String savingsName) {
+    public double calculateSavings(float savingsIncome, float savingsFactor, String savingsName) {
         Savings savings = (Savings) applicationContext.getBean(savingsName + "_savings");
         return savings.calculateSavings(savingsFactor, savingsIncome);
     }

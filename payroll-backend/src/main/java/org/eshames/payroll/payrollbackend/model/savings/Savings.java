@@ -1,6 +1,9 @@
 package org.eshames.payroll.payrollbackend.model.savings;
 
-public interface Savings {
+import org.eshames.payroll.payrollbackend.model.dto.impl.SavingsDTO;
 
-    float calculateSavings(float savingsFactor, float grossIncome);
+public interface Savings {
+    double calculateSavings(double grossIncome, SavingsDTO savingsDTO);
+
+    double getExemptionFactor();
 }

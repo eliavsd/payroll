@@ -6,8 +6,7 @@ import org.eshames.payroll.payrollbackend.model.dto.PayrollDTO;
 
 @Getter
 @Setter
-public class InputDTO implements PayrollDTO {
-    private IncomeDTO incomeDTO;
-    private TaxDTO taxDTO;
-    private SavingsDTO savingsDTO;
+public class SavingsDTO implements PayrollDTO {
+    private String savingsType;
+    private double savingsFactor;
 }
