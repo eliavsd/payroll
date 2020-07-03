@@ -8,10 +8,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class ResultDTO {
-    private float grossForSavings;
-    private float totalGrossIncome;
-    private float totalGrossForTax;
-    private float incomeTax;
-    private float insuranceTax;
-    private float savings;
+    private double grossForSavings;
+    private double totalGrossIncome;
+    private double totalGrossForTax;
+    private double incomeTax;
+    private double insuranceTax;
+    private double savings;
 }

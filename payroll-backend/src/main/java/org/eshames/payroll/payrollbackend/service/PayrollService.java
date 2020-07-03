@@ -18,18 +18,17 @@ public class PayrollService {
     public ResultDTO grossToNet(InputDTO grossIncome) {
         IncomeDTO incomeDTO = grossIncome.getIncomeDTO();
         TaxDTO taxDTO = grossIncome.getTaxDTO();
-        float incomeForSavings = incomeDTO.getBaseSalary() + incomeDTO.getGlobalOvertime();
-        float totalGrossIncome = incomeForSavings + incomeDTO.getTravelCopay() + incomeDTO.getOtherCopay();
-        float totalGrossForTax = totalGrossIncome;
-        float totalIncomeTax = calculateTax(totalGrossForTax, taxDTO, "income");
-        float insuranceTax = calculateTax(totalGrossForTax, taxDTO, "insurance");
+        int incomeForSavings = incomeDTO.getBaseSalary() + incomeDTO.getGlobalOvertime();
+        int totalGrossIncome = incomeForSavings + incomeDTO.getTravelCopay() + incomeDTO.getOtherCopay();
+        double totalIncomeTax = calculateTax(totalGrossIncome, taxDTO, "income");
+        double insuranceTax = calculateTax(totalGrossIncome, taxDTO, "insurance");
         float savings = 0;
-        return new ResultDTO(incomeForSavings, totalGrossIncome, totalGrossForTax, totalIncomeTax, insuranceTax, savings);
+        return new ResultDTO(incomeForSavings, totalGrossIncome, totalGrossIncome, totalIncomeTax, insuranceTax, savings);
     }
 
 
 
-    public float calculateTax(float taxableIncome, TaxDTO taxDTO, String taxName) {
+    public double calculateTax(int taxableIncome, TaxDTO taxDTO, String taxName) {
         Tax tax = (Tax) applicationContext.getBean(taxName + "_tax");
         return tax.calculateTax(taxableIncome, taxDTO);
     }
