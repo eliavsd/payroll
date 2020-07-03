@@ -19,9 +19,12 @@ public final class IncomeTax implements Tax {
         List<Integer> relevantBrackets = INCOME_BRACKETS.stream()
                 .filter(incomeBracket -> incomeBracket <= taxableIncome)
                 .collect(Collectors.toList());
-        for (int i = 1; i <= relevantBrackets.size(); i++) {
-            float incomeForBracket = relevantBrackets.get(i - 1) - taxableIncome;
+        float totalTax = 0;
+        for (int i = 1; i < relevantBrackets.size(); i++) {
+            float taxForBracket = Math.min(taxableIncome, (relevantBrackets.get(i) - relevantBrackets.get(i - 1)))
+                    * INCOME_RATES.get(i);
+            totalTax += taxForBracket;
         }
-        return 0 - (taxDTO.getTaxPoints() * TaxConstants.TAX_POINT_VALUE);
+        return totalTax - (taxDTO.getTaxPoints() * TaxConstants.TAX_POINT_VALUE);
     }
 }

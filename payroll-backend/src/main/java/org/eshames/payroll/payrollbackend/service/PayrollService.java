@@ -19,8 +19,8 @@ public class PayrollService {
         IncomeDTO incomeDTO = grossIncome.getIncomeDTO();
         TaxDTO taxDTO = grossIncome.getTaxDTO();
         float incomeForSavings = incomeDTO.getBaseSalary() + incomeDTO.getGlobalOvertime();
-        float totalGrossIncome = incomeForSavings;
-        float totalGrossForTax = incomeForSavings;
+        float totalGrossIncome = incomeForSavings + incomeDTO.getTravelCopay() + incomeDTO.getOtherCopay();
+        float totalGrossForTax = totalGrossIncome;
         float totalIncomeTax = calculateTax(totalGrossForTax, taxDTO, "income");
         float insuranceTax = calculateTax(totalGrossForTax, taxDTO, "insurance");
         float savings = 0;
