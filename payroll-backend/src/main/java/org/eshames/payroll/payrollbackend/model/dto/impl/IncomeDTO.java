@@ -12,7 +12,6 @@ public class IncomeDTO implements PayrollDTO {
     private float baseSalary;
     private float globalOvertime;
     private PayBasis payBasis;
-    private float percentage;
     private float travelCopay;
     private float otherCopay;
 }

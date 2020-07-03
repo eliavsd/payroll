@@ -6,8 +6,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum PayBasis {
-    HOURLY("Hourly"),
-    MONTHLY("Monthly");
-
-    private final String fullForm;
+    HOURLY,
+    MONTHLY
 }
