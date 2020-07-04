@@ -22,6 +22,6 @@ public abstract class Tax {
             double taxForBracket = incomeInBracket * rates.get(i);
             totalTax += taxForBracket;
         }
-        return totalTax;
+        return (double) Math.round(totalTax * 100) / 100;
     }
 }

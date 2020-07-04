@@ -30,7 +30,6 @@ public class PayrollService {
         Map<String, Double> savingsResults = calculateSavings(incomeForSavings, savings);
         // I've stopped generifying here, because I want the BL to be clearer
         double pensionSavings = savingsResults.getOrDefault("pension", 0.0);
-        double edufundSavings = savingsResults.getOrDefault("edufund", 0.0);
         // Now take the income tax that would be paid if we didn't deduct the pension from the gross and apply a 35%
         // discount on it before adding it as income tax
         Map<String, Double> taxResults = calculateTaxes(totalGrossIncome, taxes);
@@ -40,10 +39,8 @@ public class PayrollService {
         Savings pensionSavingsBean = (Savings) applicationContext.getBean("pension_savings");
         incomeTax -= Math.min(pensionSavingsBean.getExemptionFactor() * pensionSavings,
                 pensionSavingsBean.getExemptionFactor() * pensionSavingsBean.getMaxExemption());
-        incomeTax = Math.max(incomeTax, 0);
-        double insuranceTax = taxResults.getOrDefault("insurance", 0.0);
-        return new ResultDTO(incomeForSavings, totalGrossIncome, totalGrossIncome, incomeTax,
-                insuranceTax, pensionSavings, edufundSavings);
+        taxResults.put("income", Math.max(incomeTax, 0));
+        return new ResultDTO(incomeForSavings, totalGrossIncome, totalGrossIncome, taxResults, savingsResults);
     }
 
     private Map<String, Double> calculateTaxes(double taxableIncome, List<TaxDTO> taxes) {

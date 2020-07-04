@@ -16,6 +16,6 @@ public class NationalInsuranceTax extends Tax {
     }
     @Override
     public double calculateTax(double taxableIncome, TaxDTO taxDTO) {
-        return Math.ceil(super.calculateTax(taxableIncome, taxDTO));
+        return super.calculateTax(taxableIncome, taxDTO);
     }
 }
