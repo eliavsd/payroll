@@ -1,6 +1,7 @@
 package org.eshames.payroll.payrollbackend.service;
 
 import org.eshames.payroll.payrollbackend.model.dto.impl.*;
+import org.eshames.payroll.payrollbackend.model.savings.PensionInsuranceSavings;
 import org.eshames.payroll.payrollbackend.model.savings.Savings;
 import org.eshames.payroll.payrollbackend.model.taxes.Tax;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,12 @@ public class PayrollService {
         // discount on it before adding it as income tax
         Map<String, Double> taxResults = calculateTaxes(totalGrossIncome, taxes);
         double incomeTax = taxResults.getOrDefault("income", 0.0);
+        // Deduct the insurance exemption from income tax only - 35% from all taxes owed up to 616ils of money put
+        // aside. Any remaining savings is subject to normal income tax
+        Savings pensionSavingsBean = (Savings) applicationContext.getBean("pension_savings");
+        incomeTax -= Math.min(pensionSavingsBean.getExemptionFactor() * pensionSavings,
+                pensionSavingsBean.getExemptionFactor() * pensionSavingsBean.getMaxExemption());
+        incomeTax = Math.max(incomeTax, 0);
         double insuranceTax = taxResults.getOrDefault("insurance", 0.0);
         return new ResultDTO(incomeForSavings, totalGrossIncome, totalGrossIncome, incomeTax,
                 insuranceTax, pensionSavings, edufundSavings);

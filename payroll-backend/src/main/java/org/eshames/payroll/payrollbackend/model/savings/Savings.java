@@ -6,4 +6,6 @@ public interface Savings {
     double calculateSavings(double grossIncome, SavingsDTO savingsDTO);
 
     double getExemptionFactor();
+
+    double getMaxExemption();
 }

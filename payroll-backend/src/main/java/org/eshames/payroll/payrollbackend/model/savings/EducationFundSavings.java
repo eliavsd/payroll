@@ -14,6 +14,11 @@ public class EducationFundSavings implements Savings {
 
     @Override
     public double getExemptionFactor() {
-        return 1;
+        return 0;
+    }
+
+    @Override
+    public double getMaxExemption() {
+        return 0;
     }
 }

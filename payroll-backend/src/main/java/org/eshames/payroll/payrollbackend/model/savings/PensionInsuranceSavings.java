@@ -15,4 +15,9 @@ public class PensionInsuranceSavings implements Savings {
     public double getExemptionFactor() {
         return 0.35;
     }
+
+    @Override
+    public double getMaxExemption() {
+        return 616;
+    }
 }
