@@ -9,7 +9,7 @@ public abstract class Tax {
     protected List<Double> rates;
     
     
-    public double calculateTax(int taxableIncome, TaxDTO taxDTO) {
+    public double calculateTax(double taxableIncome, TaxDTO taxDTO) {
         double totalTax = 0;
         for (int i = 0; i < brackets.size() - 1; i++) {
             double lowerLimit = brackets.get(i);

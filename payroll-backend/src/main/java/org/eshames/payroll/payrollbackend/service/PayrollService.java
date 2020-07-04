@@ -1,14 +1,18 @@
 package org.eshames.payroll.payrollbackend.service;
 
-import org.eshames.payroll.payrollbackend.model.dto.impl.IncomeDTO;
-import org.eshames.payroll.payrollbackend.model.dto.impl.InputDTO;
-import org.eshames.payroll.payrollbackend.model.dto.impl.ResultDTO;
-import org.eshames.payroll.payrollbackend.model.dto.impl.TaxDTO;
+import org.eshames.payroll.payrollbackend.model.dto.impl.*;
 import org.eshames.payroll.payrollbackend.model.savings.Savings;
 import org.eshames.payroll.payrollbackend.model.taxes.Tax;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.expression.Operation;
 import org.springframework.stereotype.Service;
+
+import javax.naming.OperationNotSupportedException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class PayrollService {
@@ -17,24 +21,48 @@ public class PayrollService {
 
     public ResultDTO grossToNet(InputDTO grossIncome) {
         IncomeDTO incomeDTO = grossIncome.getIncomeDTO();
-        TaxDTO taxDTO = grossIncome.getTaxDTO();
-        int incomeForSavings = incomeDTO.getBaseSalary() + incomeDTO.getGlobalOvertime();
-        int totalGrossIncome = incomeForSavings + incomeDTO.getTravelCopay() + incomeDTO.getOtherCopay();
-        double totalIncomeTax = calculateTax(totalGrossIncome, taxDTO, "income");
-        double insuranceTax = calculateTax(totalGrossIncome, taxDTO, "insurance");
-        float savings = 0;
-        return new ResultDTO(incomeForSavings, totalGrossIncome, totalGrossIncome, totalIncomeTax, insuranceTax, savings);
+        List<TaxDTO> taxes = grossIncome.getTaxes();
+        List<SavingsDTO> savings = grossIncome.getSavings();
+        double incomeForSavings = incomeDTO.getBaseSalary() + incomeDTO.getGlobalOvertime();
+        double totalGrossIncome = incomeForSavings + incomeDTO.getTravelCopay() + incomeDTO.getOtherCopay();
+
+        Map<String, Double> savingsResults = calculateSavings(incomeForSavings, savings);
+        // I've stopped generifying here, because I want the BL to be clearer
+        double pensionSavings = savingsResults.getOrDefault("pension", 0.0);
+        double edufundSavings = savingsResults.getOrDefault("edufund", 0.0);
+        // Now take the income tax that would be paid if we didn't deduct the pension from the gross and apply a 35%
+        // discount on it before adding it as income tax
+        Map<String, Double> taxResults = calculateTaxes(totalGrossIncome, taxes);
+        double incomeTax = taxResults.getOrDefault("income", 0.0);
+        double insuranceTax = taxResults.getOrDefault("insurance", 0.0);
+        return new ResultDTO(incomeForSavings, totalGrossIncome, totalGrossIncome, incomeTax,
+                insuranceTax, pensionSavings, edufundSavings);
     }
 
+    private Map<String, Double> calculateTaxes(double taxableIncome, List<TaxDTO> taxes) {
+        Map<String, Double> taxResults = new HashMap<>();
 
+        for (TaxDTO tax: taxes) {
+            taxResults.put(tax.getTaxName(), calculateTax(taxableIncome, tax));
+        }
+        return taxResults;
+    }
 
-    public double calculateTax(int taxableIncome, TaxDTO taxDTO, String taxName) {
-        Tax tax = (Tax) applicationContext.getBean(taxName + "_tax");
+    private Map<String, Double> calculateSavings(double savingsIncome, List<SavingsDTO> savings) {
+        Map<String, Double> savingsResults = new HashMap<>();
+        for (SavingsDTO saving: savings) {
+            savingsResults.put(saving.getSavingsName(), calculateSaving(savingsIncome, saving));
+        }
+        return savingsResults;
+    }
+
+    private double calculateTax(double taxableIncome, TaxDTO taxDTO) {
+        Tax tax = (Tax) applicationContext.getBean(taxDTO.getTaxName() + "_tax");
         return tax.calculateTax(taxableIncome, taxDTO);
     }
 
-    public double calculateSavings(float savingsIncome, float savingsFactor, String savingsName) {
-        Savings savings = (Savings) applicationContext.getBean(savingsName + "_savings");
-        return savings.calculateSavings(savingsFactor, savingsIncome);
+    public double calculateSaving(double savingsIncome, SavingsDTO savingsDTO) {
+        Savings savings = (Savings) applicationContext.getBean(savingsDTO.getSavingsName() + "_savings");
+        return savings.calculateSavings(savingsIncome, savingsDTO);
     }
 }

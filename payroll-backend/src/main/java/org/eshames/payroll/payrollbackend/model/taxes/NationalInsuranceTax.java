@@ -15,7 +15,7 @@ public class NationalInsuranceTax extends Tax {
         rates = Arrays.asList(0.035, 0.12, 0.0);
     }
     @Override
-    public double calculateTax(int taxableIncome, TaxDTO taxDTO) {
+    public double calculateTax(double taxableIncome, TaxDTO taxDTO) {
         return Math.ceil(super.calculateTax(taxableIncome, taxDTO));
     }
 }

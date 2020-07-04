@@ -13,5 +13,6 @@ public class ResultDTO {
     private double totalGrossForTax;
     private double incomeTax;
     private double insuranceTax;
-    private double savings;
+    private double pensionSavings;
+    private double edufundSavings;
 }

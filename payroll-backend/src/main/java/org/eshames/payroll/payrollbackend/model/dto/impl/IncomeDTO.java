@@ -9,9 +9,9 @@ import org.eshames.payroll.payrollbackend.model.dto.PayrollDTO;
 @Setter
 public class IncomeDTO implements PayrollDTO {
 
-    private int baseSalary;
-    private int globalOvertime;
+    private double baseSalary;
+    private double globalOvertime;
     private PayBasis payBasis;
-    private int travelCopay;
-    private int otherCopay;
+    private double travelCopay;
+    private double otherCopay;
 }

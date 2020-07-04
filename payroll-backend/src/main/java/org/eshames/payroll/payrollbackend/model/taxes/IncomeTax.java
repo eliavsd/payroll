@@ -18,7 +18,7 @@ public class IncomeTax extends Tax {
     }
 
     @Override
-    public double calculateTax(int taxableIncome, TaxDTO taxDTO) {
+    public double calculateTax(double taxableIncome, TaxDTO taxDTO) {
         double taxBeforeDeduction = super.calculateTax(taxableIncome, taxDTO);
         return Math.ceil(taxBeforeDeduction - (taxDTO.getTaxPoints() * TaxConstants.TAX_POINT_VALUE));
     }
