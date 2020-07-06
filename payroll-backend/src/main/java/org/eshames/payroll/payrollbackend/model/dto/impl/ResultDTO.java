@@ -4,14 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Map;
+
 @Getter
 @Setter
 @AllArgsConstructor
 public class ResultDTO {
-    private float grossForSavings;
-    private float totalGrossIncome;
-    private float totalGrossForTax;
-    private float incomeTax;
-    private float insuranceTax;
-    private float savings;
+    private double totalSavingsEligibleIncome;
+    private double totalGrossIncome;
+    private double totalTaxableIncome;
+    private Map<String, Double> taxResults;
+    private Map<String, Double> savingsResults;
 }

@@ -7,5 +7,6 @@ import org.eshames.payroll.payrollbackend.model.dto.PayrollDTO;
 @Getter
 @Setter
 public class TaxDTO implements PayrollDTO {
-    private float taxPoints;
+    private String taxName;
+    private double taxPoints;
 }
