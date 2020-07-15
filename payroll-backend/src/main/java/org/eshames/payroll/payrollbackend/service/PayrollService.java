@@ -1,26 +1,25 @@
 package org.eshames.payroll.payrollbackend.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.eshames.payroll.payrollbackend.model.dto.impl.*;
-import org.eshames.payroll.payrollbackend.model.savings.PensionInsuranceSavings;
 import org.eshames.payroll.payrollbackend.model.savings.Savings;
 import org.eshames.payroll.payrollbackend.model.taxes.Tax;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.expression.Operation;
 import org.springframework.stereotype.Service;
 
-import javax.naming.OperationNotSupportedException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class PayrollService {
     @Autowired
     ApplicationContext applicationContext;
 
     public ResultDTO grossToNet(InputDTO grossIncome) {
+        log.info("Received request JSON: {}", grossIncome.toString());
         IncomeDTO incomeDTO = grossIncome.getIncomeDTO();
         List<TaxDTO> taxes = grossIncome.getTaxes();
         List<SavingsDTO> savings = grossIncome.getSavings();
