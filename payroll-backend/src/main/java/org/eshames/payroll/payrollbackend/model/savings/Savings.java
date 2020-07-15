@@ -7,5 +7,5 @@ public interface Savings {
 
     double getExemptionFactor();
 
-    doubley getMaxExemption();
+    double getMaxExemption();
 }
