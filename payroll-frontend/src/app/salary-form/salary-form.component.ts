@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PayrollService} from '../service/payroll.service';
+import {ResultDTO} from '../dto/result-dto';
+import {PayrollDTO} from '../dto/payroll-dto';
 
 @Component({
   selector: 'app-salary-form',
@@ -8,9 +10,11 @@ import {PayrollService} from '../service/payroll.service';
 })
 export class SalaryFormComponent implements OnInit {
 
-  Re
+  @Input()
+  payrollDTO : PayrollDTO;
 
   constructor(private payrollService: PayrollService) {
+    this.payrollDTO = new PayrollDTO();
   }
 
   ngOnInit() {
