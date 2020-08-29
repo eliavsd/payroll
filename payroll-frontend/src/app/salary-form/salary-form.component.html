@@ -1,27 +1,75 @@
-<form #salaryForm="ngForm">
-  <div class="p-grid ui-fluid">
-    <div class="p-dir-row p-md-4">
+<form name="salaryForm" #salaryForm="ngForm">
+  <p-card>
+    <h5>Income</h5>
+    <div class="p-grid ui-fluid" id="incomeSection">
       <div class="ui-inputgroup">
         <span class="ui-inputgroup-addon">$</span>
-        <input id="base" type="text" pInputText placeholder="Base Salary"
+        <input name="base" type="text" pInputText placeholder="Base Salary"
                [(ngModel)]="payrollDTO.incomeDTO.baseSalary">
       </div>
-    </div>
-    <div class="p-dir-row p-md-4">
       <div class="ui-inputgroup">
         <span class="ui-inputgroup-addon">$</span>
-        <input id="reimburse" type="text" pInputText placeholder="Reimbursements"
+        <input name="overtime" type="text" pInputText placeholder="Global Overtime"
+               [(ngModel)]="payrollDTO.incomeDTO.globalOvertime">
+      </div>
+      <div class="ui-inputgroup">
+        <p-dropdown name="selectedPayBasis" [options]="payBasisOptions"
+                    [(ngModel)]="this.payrollDTO.incomeDTO.payBasis"
+                    (onChange)="onChange($event)"></p-dropdown>
+      </div>
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon">$</span>
+        <input name="travel" id="travel" type="text" pInputText placeholder="Travel"
+               [(ngModel)]="payrollDTO.incomeDTO.travelCopay">
+      </div>
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon">$</span>
+        <input name="reimburse" id="reimburse" type="text" pInputText placeholder="Reimbursements"
                [(ngModel)]="payrollDTO.incomeDTO.otherCopay">
       </div>
     </div>
-    <div class="p-dir-row p-md-4">
+  </p-card>
+  <p-card>
+    <div class="p-grid ui-fluid" id="taxSection">
+      <h5>Taxes</h5>
       <div class="ui-inputgroup">
         <span class="ui-inputgroup-addon">$</span>
-        <input id="travel" type="text" pInputText placeholder="Travel" [(ngModel)]="payrollDTO.incomeDTO.travelCopay">
+        <input name="incomeTax" type="text" pInputText placeholder="Income Tax Credits"
+               [(ngModel)]="incomeTaxCredits">
       </div>
     </div>
-    <div class="p-dir-row p-md-4">
-      <p-button label="Click" (onClick)=onSubmit()></p-button>
+  </p-card>
+  <p-card>
+    <div class="p-grid ui-fluid" id="savingsSection">
+      <h5>Savings</h5>
+      <p-card>
+        <div class="ui-inputgroup">
+          <p-dropdown name="selectedPensionOption" [options]="savingsTypes"
+                      [(ngModel)]="pensionOption"
+                      (onChange)="onChange($event)"></p-dropdown>
+        </div>
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon">$</span>
+          <input name="pension" type="text" pInputText placeholder="Pension"
+                 [(ngModel)]="pensionFactor">
+        </div>
+      </p-card>
+      <p-card>
+        <div class="ui-inputgroup">
+          <p-dropdown name="selectedEdufundOption" [options]="savingsTypes"
+                      [(ngModel)]="edufundOption"
+                      (onChange)="onChange($event)"></p-dropdown>
+        </div>
+
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon">$</span>
+          <input name="pension" type="text" pInputText placeholder="Education Fund Factor"
+                 [(ngModel)]="edufundFactor">
+        </div>
+      </p-card>
     </div>
+  </p-card>
+  <div class="p-dir-row p-md-4">
+    <p-button label="Click" (onClick)=onSubmit()></p-button>
   </div>
 </form>

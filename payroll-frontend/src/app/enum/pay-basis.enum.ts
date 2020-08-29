@@ -1,4 +1,4 @@
 export enum PayBasis {
-  HOURLY,
-  MONTHLY
+  HOURLY="Hourly",
+  MONTHLY="Monthly"
 }

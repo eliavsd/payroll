@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { SalaryFormComponent } from './salary-form/salary-form.component';
-import {ButtonModule, CheckboxModule, InputTextModule, RadioButtonModule} from 'primeng';
+import {ButtonModule, CardModule, CheckboxModule, DropdownModule, InputTextModule, RadioButtonModule} from 'primeng';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
@@ -12,7 +12,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
-    SalaryFormComponent
+    SalaryFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,6 +24,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     CheckboxModule,
     RadioButtonModule,
+    CardModule,
+    DropdownModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

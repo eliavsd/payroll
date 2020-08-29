@@ -11,7 +11,5 @@ export class PayrollDTO {
     this.incomeDTO = new IncomeDTO();
     this.taxes = [];
     this.savings = [];
-    this.taxes.push(new TaxDTO());
-    this.savings.push(new SavingsDTO());
   }
 }

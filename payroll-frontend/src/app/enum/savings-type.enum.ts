@@ -1,4 +1,4 @@
 export enum SavingsType {
-  FIXED,
-  PERCENTAGE
+  PERCENTAGE="%",
+  FIXED="Amount",
 }
