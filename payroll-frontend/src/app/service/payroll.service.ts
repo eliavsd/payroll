@@ -11,6 +11,6 @@ export class PayrollService {
   constructor(private http:HttpClient) { }
 
   public grossToNet(grossInfo: PayrollDTO): Observable<any> {
-    return this.http.post<any>("localhost:8080/payroll/grossToNet/", grossInfo);
+    return this.http.post<any>("http://localhost:8080/payroll/grossToNet/", grossInfo);
   }
 }

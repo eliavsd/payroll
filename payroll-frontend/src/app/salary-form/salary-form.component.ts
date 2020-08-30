@@ -26,15 +26,16 @@ export class SalaryFormComponent implements OnInit {
 
   payBasisOptions: SelectItem[];
   savingsTypes: SelectItem[];
-  pensionOption;
+  pensionOption = SavingsType.PERCENTAGE;
   pensionFactor;
-  edufundOption;
+  edufundOption = SavingsType.PERCENTAGE;
   edufundFactor;
 
   constructor(private payrollService: PayrollService) {
     this.payBasisOptions = Object.keys(PayBasis).map(key => ({label: PayBasis[key], value: key}));
     this.savingsTypes = Object.keys(SavingsType).map(key => ({label: SavingsType[key], value: key}));
     this.payrollDTO = new PayrollDTO();
+    this.payrollDTO.incomeDTO.payBasis = PayBasis.MONTHLY;
   }
 
   ngOnInit() {
