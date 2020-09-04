@@ -13,11 +13,11 @@ const routes: Routes = [
   {
     path: 'salary', component: SalaryFormComponent,
     children: [
-      {path: 'income', component: IncomeFormComponent},
-      {path: 'taxes', component: TaxFormComponent},
-      {path: 'savings', component: SavingsFormComponent},]
-  },
-
+      {path: 'income', component: IncomeFormComponent, data: { animation: 'isIncome' }},
+      {path: 'taxes', component: TaxFormComponent, data: { animation: 'isTaxes' }},
+      {path: 'savings', component: SavingsFormComponent, data: { animation: 'isSavings' }}
+    ]
+  }
 ];
 
 @NgModule({

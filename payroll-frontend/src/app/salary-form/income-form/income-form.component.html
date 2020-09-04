@@ -21,6 +21,7 @@
       <input name="reimburse" id="reimburse" type="text" pInputText placeholder="Reimbursements"
              [(ngModel)]="payrollDTO.incomeDTO.otherCopay">
     </div>
-    <p-button label="Next" routerLink="/salary/taxes"></p-button>
+    <p-button style="margin-right: 1em" label="Back" (onClick)="onNext()" routerLink="/salary/taxes"></p-button>
+    <p-button label="Next" (onClick)="onNext()" routerLink="/salary/taxes"></p-button>
   </div>
 </p-card>

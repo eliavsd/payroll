@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PayrollDTO} from '../../dto/payroll-dto';
 import {PayrollService} from '../../service/payroll.service';
 import {SavingsDTO} from '../../dto/savings-dto';
 import {SavingsType} from '../../enum/savings-type.enum';
 import {SelectItem} from 'primeng';
+import {NavigationService} from '../../service/navigation.service';
 
 @Component({
   selector: 'app-savings-form',
@@ -13,14 +14,15 @@ import {SelectItem} from 'primeng';
 export class SavingsFormComponent implements OnInit {
 
   payrollDTO: PayrollDTO;
-
+  navigationService: NavigationService;
   savingsTypes: SelectItem[];
   pensionOption = SavingsType.PERCENTAGE;
   pensionFactor;
   edufundOption = SavingsType.PERCENTAGE;
   edufundFactor;
 
-  constructor(payrollService: PayrollService) {
+  constructor(navigationService: NavigationService, payrollService: PayrollService) {
+    this.navigationService = navigationService;
     this.payrollDTO = payrollService.payrollInfo;
     this.savingsTypes = Object.keys(SavingsType).map(key => ({label: SavingsType[key], value: key}));
   }
@@ -53,6 +55,7 @@ export class SavingsFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.navigationService.currentIndex = 2;
   }
 
 }

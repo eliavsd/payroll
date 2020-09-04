@@ -5,6 +5,7 @@ import {PayBasis} from '../enum/pay-basis.enum';
 import {ResultDTO} from '../dto/result-dto';
 import {MenuItem, SelectItem} from 'primeng';
 import {RouterOutlet} from '@angular/router';
+import {NavigationService} from '../service/navigation.service';
 
 @Component({
   selector: 'app-salary-form',
@@ -16,19 +17,18 @@ import {RouterOutlet} from '@angular/router';
 export class SalaryFormComponent implements OnInit {
 
   navItems: MenuItem[];
-  activeNavIndex: number = 0;
+  navigationService: NavigationService;
   payrollDTO: PayrollDTO;
   incomeTaxCredits: number;
   result: ResultDTO;
-
+  payrollService: PayrollService;
   payBasisOptions: SelectItem[];
 
 
-  constructor(private payrollService: PayrollService) {
-
-
+  constructor(navigationService: NavigationService, payrollService: PayrollService) {
+    this.navigationService = navigationService;
+    this.payrollService = payrollService;
     this.payrollDTO = payrollService.payrollInfo;
-    this.payrollDTO.incomeDTO.payBasis = PayBasis.MONTHLY;
   }
 
   ngOnInit() {
@@ -39,9 +39,9 @@ export class SalaryFormComponent implements OnInit {
     ]
   }
 
-  prepareRoute(outlet: RouterOutlet) {
+/*  prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
-  }
+  }*/
 
   onSubmit() {
 
