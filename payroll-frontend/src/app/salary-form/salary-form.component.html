@@ -1,6 +1,8 @@
 <p-steps [model]="navItems" [(activeIndex)]="activeNavIndex" [readonly]="false"></p-steps>
 
-<router-outlet>Current form step should be here...</router-outlet>
+<div [@routeAnimations]="prepareRoute(outlet)">
+<router-outlet #outlet="outlet">Current form step should be here...</router-outlet>
+</div>
 
 <div class="p-dir-row p-md-4">
   <p-button label="Finish And Submit" (onClick)=onSubmit()></p-button>

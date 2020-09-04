@@ -4,6 +4,7 @@ import {PayrollDTO} from '../dto/payroll-dto';
 import {PayBasis} from '../enum/pay-basis.enum';
 import {ResultDTO} from '../dto/result-dto';
 import {MenuItem, SelectItem} from 'primeng';
+import {RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-salary-form',
@@ -36,6 +37,10 @@ export class SalaryFormComponent implements OnInit {
       {label: 'Taxes'},
       {label: 'Savings'}
     ]
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 
   onSubmit() {

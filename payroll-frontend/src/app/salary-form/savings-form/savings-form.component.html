@@ -1,0 +1,26 @@
+<p-card>
+  <div class="ui-fluid" id="savingsSection">
+    <h5>Savings</h5>
+    <p-card>
+      <div class="p-col p-md-1">
+        <p-dropdown name="selectedPensionOption" [options]="savingsTypes"
+                    [(ngModel)]="pensionOption"></p-dropdown>
+      </div>
+      <div class="p-col p-md-1">
+        <input name="pension" type="text" pInputText placeholder="Pension"
+               [(ngModel)]="pensionFactor">
+      </div>
+    </p-card>
+    <p-card>
+      <div class="p-col p-md-1">
+        <p-dropdown name="selectedEdufundOption" [options]="savingsTypes"
+                    [(ngModel)]="edufundOption"></p-dropdown>
+      </div>
+      <div class="p-col p-md-1">
+        <input name="pension" type="text" pInputText placeholder="Education Fund"
+               [(ngModel)]="edufundFactor">
+      </div>
+    </p-card>
+    <p-button label="Next" (onClick)="onNext()" routerLink="/salary/results"></p-button>
+  </div>
+</p-card>

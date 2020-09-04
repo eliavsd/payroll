@@ -1,0 +1,10 @@
+<p-card>
+  <div class="ui-fluid" id="taxSection">
+    <h5>Taxes</h5>
+    <div class="p-col p-sm-1">
+      <input name="incomeTax" type="text" pInputText placeholder="Tax Credits"
+             [(ngModel)]="incomeTaxCredits">
+    </div>
+    <p-button label="Next" (onClick)="onNext()" routerLink="/salary/savings"></p-button>
+  </div>
+</p-card>

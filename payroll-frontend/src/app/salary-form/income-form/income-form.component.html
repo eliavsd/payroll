@@ -1,0 +1,26 @@
+<p-card>
+  <h5>Income</h5>
+  <div class="ui-fluid" id="incomeSection">
+    <div class="p-col p-sm-1">
+      <input name="base" type="text" pInputText placeholder="Base Salary"
+             [(ngModel)]="payrollDTO.incomeDTO.baseSalary">
+    </div>
+    <div class="p-col p-sm-1">
+      <input name="overtime" type="text" pInputText placeholder="Global Overtime"
+             [(ngModel)]="payrollDTO.incomeDTO.globalOvertime">
+    </div>
+    <div class="p-col p-sm-1">
+      <p-dropdown name="selectedPayBasis" [options]="payBasisOptions"
+                  [(ngModel)]="this.payrollDTO.incomeDTO.payBasis"></p-dropdown>
+    </div>
+    <div class="p-col p-sm-1">
+      <input name="travel" id="travel" type="text" pInputText placeholder="Travel"
+             [(ngModel)]="payrollDTO.incomeDTO.travelCopay">
+    </div>
+    <div class="p-col p-sm-1">
+      <input name="reimburse" id="reimburse" type="text" pInputText placeholder="Reimbursements"
+             [(ngModel)]="payrollDTO.incomeDTO.otherCopay">
+    </div>
+    <p-button label="Next" routerLink="/salary/taxes"></p-button>
+  </div>
+</p-card>
