@@ -47,9 +47,13 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.30</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.javax0.license3j</groupId>
+            <artifactId>license3j</artifactId>
+            <version>3.1.5</version>
         </dependency>
     </dependencies>
 
@@ -109,7 +113,27 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>2.6.0</version>
+                <configuration>
+                    <from>
+                        <image>gcr.io/distroless/java:debug</image>
+                    </from>
+                    <to>
+                        <image>docker.io/eliavsd/payroll</image>
+                    </to>
+<!--                    <extraDirectories>
+                        <paths>
+                            <path>
+                                <from>private-key</from>
+                                <into>/home/private-key</into>
+                            </path>
+                        </paths>
+                    </extraDirectories>-->
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
 </project>

@@ -16,15 +16,17 @@ export class SavingsFormComponent implements OnInit {
   payrollDTO: PayrollDTO;
   navigationService: NavigationService;
   savingsTypes: SelectItem[];
-  pensionOption = SavingsType.PERCENTAGE;
+  pensionOption;
   pensionFactor;
-  edufundOption = SavingsType.PERCENTAGE;
+  edufundOption;
   edufundFactor;
 
   constructor(navigationService: NavigationService, payrollService: PayrollService) {
     this.navigationService = navigationService;
     this.payrollDTO = payrollService.payrollInfo;
     this.savingsTypes = Object.keys(SavingsType).map(key => ({label: SavingsType[key], value: key}));
+    this.pensionOption = SavingsType.PERCENTAGE;
+    this.edufundOption = SavingsType.PERCENTAGE;
   }
 
   onNext() {
@@ -50,8 +52,7 @@ export class SavingsFormComponent implements OnInit {
       edufund.savingsFactor /= 100;
     }
 
-    this.payrollDTO.savings.push(pension);
-    this.payrollDTO.savings.push(edufund);
+    this.payrollDTO.savings = [pension, edufund]
   }
 
   ngOnInit(): void {

@@ -33,9 +33,9 @@ export class SalaryFormComponent implements OnInit {
 
   ngOnInit() {
     this.navItems = [
-      {label: 'Income'},
-      {label: 'Taxes'},
-      {label: 'Savings'}
+      {label: 'Income', routerLink: 'income'},
+      {label: 'Taxes', routerLink: 'taxes'},
+      {label: 'Savings', routerLink: 'savings'}
     ]
   }
 

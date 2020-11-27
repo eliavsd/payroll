@@ -15,7 +15,7 @@ public class PayrollController {
     PayrollService payrollService;
 
     @PostMapping("/grossToNet")
-    public ResultDTO grossToNet(@RequestBody InputDTO inputDTO) {
+    public ResultDTO grossToNet(@RequestBody InputDTO inputDTO) throws Exception {
         return payrollService.grossToNet(inputDTO);
     }
 }

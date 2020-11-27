@@ -1,4 +1,6 @@
-<p-steps [model]="navItems" [(activeIndex)]="navigationService.currentIndex" [readonly]="false"></p-steps>
+<p-steps [model]="navItems"
+         [(activeIndex)]="navigationService.currentIndex"
+         [readonly]="false"></p-steps>
 
 <!--<div [@routeAnimations]="prepareRoute(outlet)">-->
 <router-outlet>Current form step should be here...</router-outlet>
@@ -6,4 +8,8 @@
 
 <div class="p-dir-row p-md-4">
   <p-button label="Finish And Submit" (onClick)=onSubmit()></p-button>
+</div>
+
+<div class="p-dir-row p-md-4">
+  {{ payrollDTO | json }}
 </div>
