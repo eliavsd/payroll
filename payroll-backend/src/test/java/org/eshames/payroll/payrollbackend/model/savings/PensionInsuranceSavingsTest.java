@@ -9,6 +9,7 @@ class PensionInsuranceSavingsTest {
 
     private final PensionInsuranceSavings pensionSavings = new PensionInsuranceSavings();
 
+    // Verifies pension savings calculation: grossIncome * savingsFactor
     @Test
     void calculateSavingsReturnsCorrectAmount() {
         SavingsDTO dto = new SavingsDTO();
@@ -16,6 +17,7 @@ class PensionInsuranceSavingsTest {
 
         double result = pensionSavings.calculateSavings(10000, dto);
 
+        // expectedSavings = grossIncome * savingsFactor = 10000 * 0.0625 = 625.0
         assertEquals(625.0, result, 0.001);
     }
 }
