@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/payroll")
 public class PayrollController {
 
+    static final String SUPER_SECRET_TOKEN = "eliav_12345_dont_share_this";
+
     @Autowired
     PayrollService payrollService;
 
